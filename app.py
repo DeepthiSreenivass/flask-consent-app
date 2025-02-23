@@ -63,10 +63,10 @@ def push_csv_to_github():
     repo_url = os.getenv("GIT_REPO")
 
     if not username or not token or not repo_url:
-        print("❌ GitHub credentials not found. Make sure they are set in Render.")
+        print("❌ GitHub credentials not found. Check Render environment variables.")
         return
 
-    # Format the authenticated repo URL
+    # Use token in the authenticated GitHub URL
     repo_url = repo_url.replace("https://", f"https://{username}:{token}@")
 
     try:
