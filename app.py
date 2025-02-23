@@ -70,7 +70,7 @@ def push_csv_to_github():
     repo_url = repo_url.replace("https://", f"https://{username}:{token}@")
 
     try:
-        subprocess.run(["git", "config", "--global", "user.email", "your-email@example.com"])
+        subprocess.run(["git", "config", "--global", "user.email", "deepthirsreenivas13@gmail.com"])
         subprocess.run(["git", "config", "--global", "user.name", username])
         subprocess.run(["git", "add", "participants.csv"], check=True)
         subprocess.run(["git", "commit", "-m", "Updated participants.csv"], check=True)
