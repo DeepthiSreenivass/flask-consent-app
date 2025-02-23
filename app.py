@@ -83,7 +83,7 @@ def download_file(filename):
     return jsonify({"error": "File not found"}), 404
 
 # Clear Data Route
-@app.route("/clear-data", methods=["POST"])
+@app.route("/clear-data", methods=["GET", "POST"])
 def clear_data():
     with open(JSON_FILE, "w") as file:
         json.dump([], file)
