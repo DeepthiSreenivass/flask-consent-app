@@ -61,6 +61,11 @@ def consent_form():
 def thank_you():
     return "Thank you for your participation! Your consent has been recorded."
 
+@app.route("/init-db")
+def initialize_database():
+    init_db()
+    return "Database initialized successfully!"
+
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)
