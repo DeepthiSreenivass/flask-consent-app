@@ -4,6 +4,8 @@ import csv
 import os
 from datetime import datetime
 
+import subprocess  # Add this to execute git commands
+
 app = Flask(__name__)
 DATABASE = "participants.db"
 CSV_FILE = "participants.csv"
@@ -22,6 +24,21 @@ def init_db():
         ''')
         conn.commit()
 
+'''def save_to_csv(data):
+    file_exists = os.path.isfile(CSV_FILE)
+    with open(CSV_FILE, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        if not file_exists:
+            writer.writerow(["Full Name", "Email", "Phone Number", "Date"])
+        
+        # Ensure the date is formatted correctly
+        try:
+            formatted_date = datetime.strptime(data[3], "%Y-%m-%d").strftime("%d-%m-%Y")  # Change format if needed
+        except ValueError:
+            formatted_date = data[3]  # Use original if it fails
+        
+        writer.writerow([data[0], data[1], data[2], f"'{formatted_date}"])'''
+
 def save_to_csv(data):
     file_exists = os.path.isfile(CSV_FILE)
     with open(CSV_FILE, mode='a', newline='') as file:
@@ -36,6 +53,31 @@ def save_to_csv(data):
             formatted_date = data[3]  # Use original if it fails
         
         writer.writerow([data[0], data[1], data[2], f"'{formatted_date}"])
+    
+    # 📌 Push CSV to GitHub
+    push_csv_to_github()
+
+def push_csv_to_github():
+    username = os.getenv("GIT_USERNAME")
+    token = os.getenv("GIT_TOKEN")
+    repo_url = os.getenv("GIT_REPO")
+
+    if not username or not token or not repo_url:
+        print("❌ GitHub credentials not found. Make sure they are set in Render.")
+        return
+
+    # Format the authenticated repo URL
+    repo_url = repo_url.replace("https://", f"https://{username}:{token}@")
+
+    try:
+        subprocess.run(["git", "config", "--global", "user.email", "your-email@example.com"])
+        subprocess.run(["git", "config", "--global", "user.name", username])
+        subprocess.run(["git", "add", "participants.csv"], check=True)
+        subprocess.run(["git", "commit", "-m", "Updated participants.csv"], check=True)
+        subprocess.run(["git", "push", repo_url, "main"], check=True)
+        print("✅ CSV file pushed successfully to GitHub!")
+    except subprocess.CalledProcessError as e:
+        print("❌ Error pushing to GitHub:", e)
 
 @app.route("/", methods=["GET", "POST"])
 def consent_form():
