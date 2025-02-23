@@ -1,0 +1,211 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Merriweather', serif;
+    color: #1a3d52;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #004d70;
+  }
+  
+  .header h2 {
+    font-size: 24px;
+    color: #005a82;
+    margin-top: 10px;
+  }
+  
+  .header p {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .content h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #1e3c61;
+    font-weight: bold;
+  }
+  
+  .content p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  
+  .content ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+    padding: 10px 0;
+  }
+  
+  .content li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  footer {
+    background-color: #004d70;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  /* Form Styles */
+  form {
+    display: grid;
+    gap: 20px;
+  }
+  
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"],
+  form input[type="date"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    background-color: #f9f9f9;
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="email"]:focus,
+  form input[type="tel"]:focus,
+  form input[type="date"]:focus {
+    outline: none;
+    border-color: #004d70;
+    box-shadow: 0 0 5px rgba(0, 77, 112, 0.6);
+  }
+  
+  form label {
+    font-size: 16px;
+    color: #444;
+  }
+  
+  form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  form button {
+    padding: 14px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #004d70;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #003a58;
+  }
+  
+  /* Icon Styles */
+  label[for="agreement"] {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #444;
+  }
+  
+  label[for="agreement"] input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Section Highlights */
+  .content h3::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #004d70;
+    margin-top: 10px;
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .header h1 {
+      font-size: 30px;
+    }
+  
+    .header h2 {
+      font-size: 20px;
+    }
+  
+    .content h3 {
+      font-size: 20px;
+    }
+  
+    form {
+      padding: 15px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .container {
+      margin: 20px auto;
+      padding: 10px;
+    }
+  
+    .header h1 {
+      font-size: 26px;
+    }
+  
+    .header h2 {
+      font-size: 18px;
+    }
+  
+    .content h3 {
+      font-size: 18px;
+    }
+  
+    form button {
+      font-size: 16px;
+      padding: 12px;
+    }
+  }
+  
