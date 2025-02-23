@@ -57,27 +57,38 @@ def save_to_csv(data):
     # 📌 Push CSV to GitHub
     push_csv_to_github()
 
+import subprocess
+import os
+
 def push_csv_to_github():
     username = os.getenv("GIT_USERNAME")
     token = os.getenv("GIT_TOKEN")
-    repo_url = os.getenv("GIT_REPO")
+    repo = os.getenv("GIT_REPO")  # Example: "DeepthiSreenivass/flask-consent-app"
 
-    if not username or not token or not repo_url:
+    if not username or not token or not repo:
         print("❌ GitHub credentials not found. Check Render environment variables.")
         return
 
-    # Use token in the authenticated GitHub URL
-    repo_url = repo_url.replace("https://", f"https://{username}:{token}@")
-
     try:
-        subprocess.run(["git", "config", "--global", "user.email", "deepthirsreenivas13@gmail.com"])
-        subprocess.run(["git", "config", "--global", "user.name", username])
+        # Set up Git
+        subprocess.run(["git", "config", "--global", "user.email", "deepthirsreenivas13@gmail.com"], check=True)
+        subprocess.run(["git", "config", "--global", "user.name", username], check=True)
+
+        # Ensure we are in the right branch
+        subprocess.run(["git", "checkout", "main"], check=True)
+
+        # Pull latest changes to avoid conflicts
+        subprocess.run(["git", "pull", "origin", "main"], check=True)
+
+        # Add, commit, and push CSV file
         subprocess.run(["git", "add", "participants.csv"], check=True)
         subprocess.run(["git", "commit", "-m", "Updated participants.csv"], check=True)
-        subprocess.run(["git", "push", repo_url, "main"], check=True)
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+
         print("✅ CSV file pushed successfully to GitHub!")
     except subprocess.CalledProcessError as e:
         print("❌ Error pushing to GitHub:", e)
+
 
 @app.route("/", methods=["GET", "POST"])
 def consent_form():
